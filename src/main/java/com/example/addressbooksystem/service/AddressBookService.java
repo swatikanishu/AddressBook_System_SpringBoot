@@ -73,4 +73,9 @@ public class AddressBookService implements IAddressBookService {
         return repository.findAddressBookByEmail(email);
     }
 
+    @Override
+    public List<Address> getAddressBookBycity(String city) {
+        return repository.findAddressBookByCity(city);
+    }
+
 }
