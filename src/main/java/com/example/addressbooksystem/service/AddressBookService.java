@@ -70,12 +70,24 @@ public class AddressBookService implements IAddressBookService {
 
     @Override
     public List<Address> getAddressBookByemail(String email) {
-        return repository.findAddressBookByEmail(email);
+        List<Address> addressList= repository.findAddressBookByEmail(email);
+        if(addressList.isEmpty())
+        {
+           throw new AddressBookException("email address is not valid") ;
+        }
+        else
+            return addressList;
     }
 
     @Override
     public List<Address> getAddressBookBycity(String city) {
-        return repository.findAddressBookByCity(city);
+        List<Address>addressList=repository.findAddressBookByCity(city);
+        if(addressList.isEmpty())
+        {
+            throw new AddressBookException("city name is not valid");
+        }
+        else
+                 return addressList;
     }
 
 }
