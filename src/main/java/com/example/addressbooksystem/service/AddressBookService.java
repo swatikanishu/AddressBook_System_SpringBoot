@@ -4,6 +4,7 @@ import com.example.addressbooksystem.dto.AddressBookDto;
 import com.example.addressbooksystem.exception.AddressBookException;
 import com.example.addressbooksystem.model.Address;
 import com.example.addressbooksystem.repo.Repo;
+import com.example.addressbooksystem.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class AddressBookService implements IAddressBookService {
     @Autowired
     Repo repository;
+    @Autowired
+    TokenUtil tokenUtil;
 
 
     @Override
@@ -90,4 +93,35 @@ public class AddressBookService implements IAddressBookService {
                  return addressList;
     }
 
-}
+    @Override
+    public String addRecord(AddressBookDto addressDto) throws AddressBookException {
+        Address addressBook =new Address(addressDto);
+        repository.save(addressBook);
+        String token = tokenUtil.createToken(addressBook.getId());
+        return token;
+    }
+
+    @Override
+    public List<Address> getRecordByToken(String token) {
+        Long Id = tokenUtil.decodeToken(token);
+        Optional<Address> isDataPresent = repository.findById(Id);
+        if (isDataPresent.isPresent()) {
+            List<Address> listData = repository.findAll();
+            return listData;
+        } else {
+            System.out.println("exception....");
+            return null;
+        }
+    }
+        @Override
+        public Optional<Address> getUserRecordByToken(String token) {
+            Long Userid = tokenUtil.decodeToken(token);
+            Optional<Address> existingData = repository.findById(Userid);
+            if(existingData.isPresent()){
+                return existingData;
+            }else
+                throw new AddressBookException("Invalid Token");
+        }
+
+    }
+

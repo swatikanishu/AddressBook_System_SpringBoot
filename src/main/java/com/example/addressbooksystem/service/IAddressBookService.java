@@ -1,7 +1,6 @@
 package com.example.addressbooksystem.service;
 
 import com.example.addressbooksystem.dto.AddressBookDto;
-import com.example.addressbooksystem.dto.ResponseDto;
 import com.example.addressbooksystem.model.Address;
 
 import java.util.List;
@@ -23,4 +22,11 @@ public interface IAddressBookService {
     List<Address> getAddressBookByemail(String email);
 
     List<Address> getAddressBookBycity(String city);
+
+
+    List<Address> getRecordByToken(String token);
+
+    String addRecord(AddressBookDto addressDto);
+
+    Optional<Address> getUserRecordByToken(String token);
 }

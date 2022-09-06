@@ -73,4 +73,25 @@ public class AddressBookController {
         ResponseDto respDTO = new ResponseDto("*** Data by using city ***", employeeDataList);
         return new ResponseEntity<>(respDTO, HttpStatus.OK);
     }
+    @CrossOrigin
+    @PostMapping("/insert")
+    public ResponseEntity<String>AddAddressDetails(@Valid @RequestBody AddressBookDto addressDto) {
+        String token = service.addRecord(addressDto);
+        ResponseDto respDTO = new ResponseDto("Data Added Successfully", token);
+        return new ResponseEntity(respDTO, HttpStatus.CREATED);
+    }
+    @CrossOrigin
+    @RequestMapping("/retrieve/{token}")
+    public ResponseEntity<String>getallUserDetails(@Valid @PathVariable String token){
+        List<Address> userData = service.getRecordByToken(token);
+        ResponseDto respDTO = new ResponseDto("Data retrieved successfully", userData);
+        return new ResponseEntity(respDTO, HttpStatus.CREATED);
+    }
+    @CrossOrigin
+    @GetMapping("/getData/{token}")
+    public ResponseEntity<String>getUserData(@Valid @PathVariable String token){
+        Optional<Address> userData = service.getUserRecordByToken(token);
+        ResponseDto respDTO = new ResponseDto("Data retrieved successfully", userData);
+        return new ResponseEntity(respDTO, HttpStatus.CREATED);
+    }
 }
