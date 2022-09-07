@@ -57,8 +57,8 @@ public class AddressBookController {
 
     @DeleteMapping("/delete/{Id}")
     public ResponseEntity<ResponseDto> deleteById(@PathVariable Long Id) {
-        service.deleteById(Id);
-        ResponseDto reponseDTO = new ResponseDto("** Employee Data deleted successfully ** ", "Id:" + Id + " is deleted");
+         service.deleteById(Id);
+        ResponseDto reponseDTO = new ResponseDto("** Employee Data deleted successfully ** ", "deleted id "+Id);
         return new ResponseEntity(reponseDTO, HttpStatus.ACCEPTED);
     }
     @GetMapping("/email/{email}")

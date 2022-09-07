@@ -4,6 +4,7 @@ import com.example.addressbooksystem.dto.AddressBookDto;
 import com.example.addressbooksystem.exception.AddressBookException;
 import com.example.addressbooksystem.model.Address;
 import com.example.addressbooksystem.repo.Repo;
+import com.example.addressbooksystem.util.EmailSenderService;
 import com.example.addressbooksystem.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class AddressBookService implements IAddressBookService {
     Repo repository;
     @Autowired
     TokenUtil tokenUtil;
+    @Autowired
+    EmailSenderService emailSenderService;
 
 
     @Override
@@ -54,6 +57,11 @@ public class AddressBookService implements IAddressBookService {
             editdata.setCity(dtomodel.getCity());
             editdata.setState(dtomodel.getState());
             editdata.setZipcode(dtomodel.getZipcode());
+            String userData = "After Editing the Data: \n"+editdata.getFullName()+"\n"+editdata.getAddress()+"\n"
+                    +editdata.getCity()+"\n"+editdata.getState()+"\n"+editdata.getZipcode()+"\n"+
+                    editdata.getPhoneNumber()+"\n"+editdata.getEmail();
+            emailSenderService.sendEmail(editdata.getEmail(),"Edited Your Details", userData);
+
             return
                     repository.save(editdata);
         } else
@@ -63,12 +71,15 @@ public class AddressBookService implements IAddressBookService {
 
 
     @Override
-    public void deleteById(Long Id) {
+    public Optional<Address> deleteById(Long Id) {
 
         Optional<Address> findById = repository.findById(Id);
         if (findById.isPresent()) {
             repository.deleteById(Id);
+            emailSenderService.sendEmail(findById.get().getEmail(), "Deleted Data", "data is deleted");
+
         } else throw new AddressBookException("Id:" + Id + " not present");
+        return findById;
     }
 
     @Override
@@ -76,7 +87,7 @@ public class AddressBookService implements IAddressBookService {
         List<Address> addressList= repository.findAddressBookByEmail(email);
         if(addressList.isEmpty())
         {
-           throw new AddressBookException("email address is not valid") ;
+            throw new AddressBookException("email address is not valid") ;
         }
         else
             return addressList;
@@ -90,7 +101,7 @@ public class AddressBookService implements IAddressBookService {
             throw new AddressBookException("city name is not valid");
         }
         else
-                 return addressList;
+            return addressList;
     }
 
     @Override
@@ -98,8 +109,14 @@ public class AddressBookService implements IAddressBookService {
         Address addressBook =new Address(addressDto);
         repository.save(addressBook);
         String token = tokenUtil.createToken(addressBook.getId());
+        String userData = "Your Details: \n"+addressBook.getFullName()+"\n"+addressBook.getAddress()+"\n"
+                +addressBook.getCity()+"\n"+addressBook.getState()+"\n"+addressBook.getZipcode()+"\n"+
+                addressBook.getPhoneNumber()+"\n"+addressBook.getEmail();
+        emailSenderService.sendEmail(addressBook.getEmail(),"Added Your Details", userData);
         return token;
     }
+
+
 
     @Override
     public List<Address> getRecordByToken(String token) {
@@ -109,19 +126,18 @@ public class AddressBookService implements IAddressBookService {
             List<Address> listData = repository.findAll();
             return listData;
         } else {
-            System.out.println("exception....");
-            return null;
+            throw new AddressBookException("exception....");
+
         }
     }
-        @Override
-        public Optional<Address> getUserRecordByToken(String token) {
-            Long Userid = tokenUtil.decodeToken(token);
-            Optional<Address> existingData = repository.findById(Userid);
-            if(existingData.isPresent()){
-                return existingData;
-            }else
-                throw new AddressBookException("Invalid Token");
-        }
-
+    @Override
+    public Optional<Address> getUserRecordByToken(String token) {
+        Long Userid = tokenUtil.decodeToken(token);
+        Optional<Address> existingData = repository.findById(Userid);
+        if(existingData.isPresent()){
+            return existingData;
+        }else
+            throw new AddressBookException("Invalid Token");
     }
 
+}

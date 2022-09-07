@@ -16,12 +16,9 @@ public class AddressBookDto {
     String fullName;
     @Pattern(regexp = "^[1-9]{2}[0-9]{10}$", message="Invalid Contact Number(Should have Country Code and must be 10 digit number) example: 919234567890")
     String phoneNumber;
-
-    private List<String>  email;
-
+    String  email;
     String address;
-
-    String city;
+    List<String> city;
     String state;
     @Pattern(regexp = "^[1-9]{1}[0-9]{5}$", message="Invalid Zip Code(First digit is non-zero, Should be 6 digit), example: 234098")
     String zipcode;
