@@ -3531,3 +3531,31 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'AddressBook_System.cities' d
 2022-09-07 22:39:02.684  INFO 19832 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
 2022-09-07 22:39:02.700  INFO 19832 --- [restartedMain] c.e.a.AddressBookSystemApplication       : Started AddressBookSystemApplication in 5.462 seconds (JVM running for 6.148)
 2022-09-07 22:39:02.705  INFO 19832 --- [restartedMain] c.e.a.AddressBookSystemApplication       : hello logger
+2022-09-07 22:51:36.211  INFO 20600 --- [restartedMain] c.e.a.AddressBookSystemApplication       : Starting AddressBookSystemApplication using Java 11.0.16 on lenovo-ThinkPad-T480 with PID 20600 (/home/lenovo/IdeaProjects/AddressBookSystem/target/classes started by lenovo in /home/lenovo/IdeaProjects/AddressBookSystem)
+2022-09-07 22:51:36.214  INFO 20600 --- [restartedMain] c.e.a.AddressBookSystemApplication       : The following 1 profile is active: "dev"
+2022-09-07 22:51:36.362  INFO 20600 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-09-07 22:51:36.363  INFO 20600 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-09-07 22:51:37.312  INFO 20600 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-09-07 22:51:37.376  INFO 20600 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interfaces.
+2022-09-07 22:51:38.270  INFO 20600 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-09-07 22:51:38.285  INFO 20600 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-07 22:51:38.285  INFO 20600 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-07 22:51:38.356  INFO 20600 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-07 22:51:38.357  INFO 20600 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1993 ms
+2022-09-07 22:51:38.547  INFO 20600 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-09-07 22:51:38.603  INFO 20600 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-09-07 22:51:38.809  INFO 20600 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-09-07 22:51:38.961  INFO 20600 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-07 22:51:39.417  INFO 20600 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-07 22:51:39.449  INFO 20600 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-09-07 22:51:40.578  INFO 20600 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-09-07 22:51:40.595  INFO 20600 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-09-07 22:51:41.687  WARN 20600 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-09-07 22:51:42.156  WARN 20600 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2022-09-07 22:51:42.266  INFO 20600 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-09-07 22:51:42.304  INFO 20600 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-09-07 22:51:42.321  INFO 20600 --- [restartedMain] c.e.a.AddressBookSystemApplication       : Started AddressBookSystemApplication in 6.799 seconds (JVM running for 7.498)
+2022-09-07 22:51:42.327  INFO 20600 --- [restartedMain] c.e.a.AddressBookSystemApplication       : hello logger
+2022-09-07 22:52:09.850  INFO 20600 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-09-07 22:52:09.853  INFO 20600 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-09-07 22:52:09.863  INFO 20600 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
