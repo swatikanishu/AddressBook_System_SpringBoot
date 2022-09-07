@@ -20,7 +20,7 @@ public class AddressBookController {
     IAddressBookService service;
 
     @GetMapping(value = {"", "/", "/home"})
-    public String Welcomeaddressbook(@RequestParam(value = "name", defaultValue = "Swatika") String name) {
+    public String Welcomeaddressbook() {
         return "welcome to address book app";
     }
 
@@ -42,8 +42,8 @@ public class AddressBookController {
 
     @GetMapping("/findAll")
     public ResponseEntity<ResponseDto> findAllDetail() {
-        List<Address> allEmp = service.findAll();
-        ResponseDto responseDTO = new ResponseDto("** All Employee List ** ", allEmp);
+        List<Address> addressList = service.findAll();
+        ResponseDto responseDTO = new ResponseDto("** All Employee List ** ", addressList);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 

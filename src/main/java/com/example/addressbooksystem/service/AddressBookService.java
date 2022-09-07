@@ -71,13 +71,13 @@ public class AddressBookService implements IAddressBookService {
 
 
     @Override
-    public Optional<Address> deleteById(Long Id) {
+    public Address deleteById(Long Id) {
 
-        Optional<Address> findById = repository.findById(Id);
-        if (findById.isPresent()) {
+        Address findById = repository.findById(Id).orElse(null);
+
+        if (findById != null) {
             repository.deleteById(Id);
-            emailSenderService.sendEmail(findById.get().getEmail(), "Deleted Data", "data is deleted");
-
+            emailSenderService.sendEmail(findById.getEmail(), "Deleted Data", "data is deleted");
         } else throw new AddressBookException("Id:" + Id + " not present");
         return findById;
     }
